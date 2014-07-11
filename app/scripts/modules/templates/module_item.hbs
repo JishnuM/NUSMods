@@ -1,4 +1,44 @@
-<td class="code"><a href="/modules/{{ModuleCode}}">{{ModuleCode}}</a></td>
+<div class="media">
+  <a class="pull-left" href="#">
+    <img class="media-object img-rounded nm-module-thumbnail" src="http://nusmods.com/thumbnail.png" alt="...">
+  </a>
+  <div class="pull-right">
+    <a class="ivle btn btn-default btn-xs"
+       data-code="{{ModuleCode}}"
+       href="{{IVLELink}}"
+       target="_blank">
+      <i class="fa fa-info-circle"></i>&nbsp;IVLE
+    </a>
+    <button class="add btn btn-primary btn-xs"
+            data-code="{{ModuleCode}}"
+            type="button">
+      <i class="fa fa-plus-circle"></i>&nbsp;Add
+    </button>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading"><a href="/modules/{{ModuleCode}}">{{ModuleCode}} {{ModuleTitle}}</a></h4>
+    <p>{{ModuleDescription}}</p>
+    {{#if Prerequisite}}
+      <div><strong>Prerequisites:</strong>&nbsp;{{{parsedPrerequisite}}}</div>
+    {{/if}}
+    {{#if Preclusion}}
+      <div><strong>Preclusions:</strong>&nbsp;{{{parsedPreclusion}}}</div>
+    {{/if}}
+    {{#if Workload}}
+      <div><strong>Workload:</strong>&nbsp;{{Workload}}</div>
+    {{/if}}
+    <div><strong>Credits:</strong>&nbsp;{{ModuleCredit}}</div>
+    <div><strong>Exam:</strong>&nbsp;
+      {{#if examStr}}
+        {{examStr}}
+      {{else}}
+        No Exam
+      {{/if}}
+    </div>
+    <div><strong>Department:</strong>&nbsp;{{Deparment}}</div>
+  </div>
+</div>
+<!-- <td class="code"><a href="/modules/{{ModuleCode}}">{{ModuleCode}}</a></td>
 <td class="details">
   <div class="pull-right">
     <a class="ivle btn btn-default btn-xs"
@@ -33,5 +73,4 @@
   No Exam
 {{/if}}
 </td>
-
-<td class="department">{{Department}}</td>
+<td class="department">{{Department}}</td> -->

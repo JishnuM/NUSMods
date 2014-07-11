@@ -3,10 +3,10 @@ define(['backbone.marionette', './ModuleItemView', 'hbs!../templates/modules_lis
     'use strict';
 
     return Marionette.CompositeView.extend({
-      tagName: 'table',
-      className: 'table table-bordered table-striped',
+      tagName: 'div',
+      className: 'row',
       childView: ModuleItemView,
-      childViewContainer: 'tbody',
+      // childViewContainer: 'div',
       template: template
     });
   });

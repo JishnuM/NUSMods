@@ -3,7 +3,8 @@ define(['app', 'backbone.marionette', 'hbs!../templates/module_item'],
     'use strict';
 
     return Marionette.ItemView.extend({
-      tagName: 'tr',
+      tagName: 'div',
+      className: 'col-sm-12 nm-boxify',
       template: template,
 
       events: {

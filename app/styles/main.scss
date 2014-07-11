@@ -196,9 +196,9 @@ a {
 $module-section-min-height: 700px;
 
 .nm-boxify {
-  $margin-width: 10px;
-  min-height: $module-section-min-height;
-  padding: $margin-width;
+  margin-bottom: 10px;
+  // min-height: $module-section-min-height;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
@@ -282,14 +282,20 @@ $module-section-min-height: 700px;
   font-weight: normal;
 }
 
-#content .form-inline label:first-child {
-  width: 40px;
+#content {
+  .form-inline label:first-child {
+    display: block;
+  }
+  .checkbox-inline {
+    margin-left: 0;
+    margin-right: 10px;
+  }
 }
 
-.facet-Department .checkbox-inline {
-  display: block;
-  margin-left: 0 !important;
-}
+// .facet-Department .checkbox-inline {
+//   display: block;
+//   margin-left: 0 !important;
+// }
 
 .arrow-right {
   display: inline-block;
@@ -334,6 +340,14 @@ td {
   &.details .desc {
     margin-top: 2px;
   }
+}
+
+.nm-module-item {
+  padding: 5px;
+}
+
+.nm-module-thumbnail {
+  width: 64px;
 }
 
 // Timetable
