@@ -197,7 +197,6 @@ $module-section-min-height: 700px;
 
 .nm-boxify {
   margin-bottom: 10px;
-  // min-height: $module-section-min-height;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -206,7 +205,6 @@ $module-section-min-height: 700px;
 
 .mode-slate {
   .nm-boxify {
-    min-height: $module-section-min-height;
     border: none;
     background-color: #222326;
   }
@@ -425,6 +423,7 @@ colgroup.hover {
 }
 
 .module-page {
+  min-height: 700px !important;
   .ivle {
     margin-right: 5px;
   }
