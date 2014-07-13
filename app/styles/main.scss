@@ -288,6 +288,12 @@ $module-section-min-height: 700px;
     margin-left: 0;
     margin-right: 10px;
   }
+  a {
+    color: #666;
+  }
+  .text-muted {
+    color: #ccc;
+  }
 }
 
 // .facet-Department .checkbox-inline {
@@ -342,11 +348,22 @@ td {
 
 .nm-module-item {
   padding: 5px;
+  .nm-module-thumbnail {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+    width: 50px;
+    i {
+      line-height: 48px;
+    }
+  }
+  .nm-module-code {
+    color: #000;
+    font-weight: bold;
+  }
 }
 
-.nm-module-thumbnail {
-  width: 64px;
-}
+
 
 // Timetable
 #timetable {

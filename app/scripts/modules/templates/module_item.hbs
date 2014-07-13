@@ -1,7 +1,8 @@
-<div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object img-rounded nm-module-thumbnail" src="http://nusmods.com/thumbnail.png" alt="...">
-  </a>
+<div class="media nm-module-item">
+
+  <div class="media-object nm-module-thumbnail pull-left" alt="...">
+    <i class="fa fa-suitcase fa-2x"></i>
+  </div>  
   <div class="pull-right">
     <a class="ivle btn btn-default btn-xs"
        data-code="{{ModuleCode}}"
@@ -16,7 +17,9 @@
     </button>
   </div>
   <div class="media-body">
-    <h4 class="media-heading"><a href="/modules/{{ModuleCode}}">{{ModuleCode}} {{ModuleTitle}}</a></h4>
+    <h5 class="media-heading">
+      <a href="/modules/{{ModuleCode}}" class="nm-module-code">{{ModuleCode}} {{ModuleTitle}}</a> &middot; <span style="color: #999">{{ModuleCredit}} Credits</span>
+    </h5>
     <p>{{ModuleDescription}}</p>
     {{#if Prerequisite}}
       <div><strong>Prerequisites:</strong>&nbsp;{{{parsedPrerequisite}}}</div>
@@ -27,7 +30,6 @@
     {{#if Workload}}
       <div><strong>Workload:</strong>&nbsp;{{Workload}}</div>
     {{/if}}
-    <div><strong>Credits:</strong>&nbsp;{{ModuleCredit}}</div>
     <div><strong>Exam:</strong>&nbsp;
       {{#if examStr}}
         {{examStr}}
