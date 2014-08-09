@@ -1,8 +1,11 @@
 <div class="panel-heading">
   <h2 class="panel-title nm-section-title">
-    <a href="/modules/{{ModuleCode}}"><span class="highlight">{{ModuleCode}}</span>&nbsp;{{ModuleTitle}}</a>
+    <a href="/modules/{{ModuleCode}}">
+      <span class="highlight">{{ModuleCode}}</span>&nbsp;{{ModuleTitle}}
+    </a>&middot;
     <span class="mc">
-      <a class="js-nm-mi-filter" data-type="ModuleCredit">
+      <a class="js-nm-mi-filter" data-type="ModuleCredit"
+         title="Filter modules with {{ModuleCredit}} MCs">
         {{ModuleCredit}} MCs
       </a>
     </span>
@@ -19,6 +22,10 @@
     {{#if Prerequisite}}
       <dt>Prerequisites</dt>
       <dd>{{{linkedPrerequisite}}}</dd>
+    {{/if}}
+    {{#if Corequisite}}
+      <dt>Co-Requisite</dt>
+      <dd>{{{linkedCorequisite}}}</dd>
     {{/if}}
     {{#if Preclusion}}
       <dt>Preclusions</dt>
@@ -58,7 +65,8 @@
 </div>
 <div class="panel-footer clearfix">
   <div class="department">
-    <a class="js-nm-mi-filter" data-type="Department">
+    <a class="js-nm-mi-filter" data-type="Department"
+       title="Filter modules from {{Department}}">
       {{Department}}
     </a>
   </div>

@@ -1,10 +1,12 @@
 'use strict';
 
+var Promise = require('bluebird'); // jshint ignore:line
+var analytics = require('./analytics');
 var localforage = require('localforage');
 
 var $body = $('body');
-['theme', 'mode'].forEach(function (property) {
-  localforage.getItem(property, function (value) {
+Promise.all(['theme', 'mode'].map(function (property) {
+  return localforage.getItem(property).then(function (value) {
     if (!value) {
       value = 'default';
       localforage.setItem(property, value);
@@ -12,11 +14,11 @@ var $body = $('body');
       // For non-first time users, we want to see what modes/themes they are using.
       if (property === 'theme') {
         // Set theme custom dimension
-        ga('set', 'dimension3', value);
+        analytics.set('dimension3', value);
       }
       if (property === 'mode') {
         // Set mode custom dimension
-        ga('set', 'dimension4', value);
+        analytics.set('dimension4', value);
       }
     }
     $body.addClass(property + '-' + value);
@@ -25,7 +27,7 @@ var $body = $('body');
       $('#mode').attr('href', '/styles/' + value + '.min.css');
     }
   });
-});
+})).then(analytics.flush);
 
 var App = require('./app');
 App.start();
