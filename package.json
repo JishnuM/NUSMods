@@ -2,19 +2,19 @@
   "name": "nusmods",
   "version": "0.3.0",
   "description": "NUS CORS Module Finder & Timetable Builder (Unofficial)",
-  "homepage": "https://github.com/ahbeng/NUSMods",
+  "homepage": "https://github.com/nusmodifications/nusmods",
   "author": {
     "name": "Eu Beng Hee",
     "email": "beng@benghee.eu"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/ahbeng/NUSMods.git"
+    "url": "git://github.com/nusmodifications/nusmods.git"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/ahbeng/NUSMods/blob/master/LICENSE-MIT"
+      "url": "https://github.com/nusmodifications/nusmods/blob/master/LICENSE-MIT"
     }
   ],
   "dependencies": {
@@ -79,12 +79,13 @@
     "bootstrap/collapse": "./app/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js",
     "bootstrap/dropdown": "./app/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js",
     "bootstrap/transition": "./app/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js",
+    "jquery-ui-touch-punch": "./app/bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js",
     "jquery-ui/core": "./app/bower_components/jquery.ui/ui/core.js",
     "jquery-ui/draggable": "./app/bower_components/jquery.ui/ui/draggable.js",
     "jquery-ui/droppable": "./app/bower_components/jquery.ui/ui/droppable.js",
     "jquery-ui/mouse": "./app/bower_components/jquery.ui/ui/mouse.js",
     "jquery-ui/widget": "./app/bower_components/jquery.ui/ui/widget.js",
-    "jquery-ui-touch-punch": "./app/bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js",
+    "jquery.fileDownload": "./app/bower_components/jquery.fileDownload/src/Scripts/jquery.fileDownload.js",
     "localforage": "./app/bower_components/localforage/dist/localforage.nopromises.js",
     "qTip2": "./app/bower_components/qtip2/jquery.qtip.js",
     "select2": "./app/bower_components/select2/select2.js"

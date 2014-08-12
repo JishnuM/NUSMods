@@ -6,6 +6,7 @@ var academicCalendar = require('./academicCalendar.json');
 var padTwo = require('../../common/utils/padTwo');
 var template = require('../templates/export.hbs');
 require('bootstrap/dropdown');
+require('jquery.fileDownload');
 
 var isTutorial = {
   'Design Lecture': true,
@@ -30,28 +31,66 @@ module.exports = Marionette.ItemView.extend({
     }
     switch (event.currentTarget.id) {
       case 'jpg-file':
-        this.$('#jpg-html').val(encodeURIComponent(this.htmlTimetable()));
-        this.$('#jpg-form').submit();
-        break;
+        $.fileDownload('/jpg.php', {
+          httpMethod: 'POST',
+          data: {
+            html: encodeURIComponent(this.htmlTimetable())
+          }
+        });
+        return false;
       case 'pdf-file':
-        this.$('#pdf-html').val(encodeURIComponent(this.htmlTimetable()));
-        this.$('#pdf-form').submit();
-        break;
+        $.fileDownload('/pdf.php', {
+          httpMethod: 'POST',
+          data: {
+            html: encodeURIComponent(this.htmlTimetable())
+          }
+        });
+        return false;
       case 'html-file':
-        $(event.currentTarget).attr('href', 'data:text/html,' +
-          encodeURIComponent(this.htmlTimetable()));
+        if (this.dlAttrSupported) {
+          $(event.currentTarget).attr('href', 'data:text/html,' +
+            encodeURIComponent(this.htmlTimetable()));
+        } else {
+          $.fileDownload('/html.php', {
+            httpMethod: 'POST',
+            data: {
+              html: encodeURIComponent(this.htmlTimetable())
+            }
+          });
+          return false;
+        }
         break;
       case 'ical-file':
         if (this.isSpecialTerm) {
           // Disable as special term export is not yet supported fully.
           return false;
         }
-        $(event.currentTarget).attr('href', 'data:text/calendar,' +
-          encodeURIComponent(this.iCalendar()));
+        if (this.dlAttrSupported) {
+          $(event.currentTarget).attr('href', 'data:text/calendar,' +
+            encodeURIComponent(this.iCalendar()));
+        } else {
+          $.fileDownload('/ical.php', {
+            httpMethod: 'POST',
+            data: {
+              html: encodeURIComponent(this.iCalendar())
+            }
+          });
+          return false;
+        }
         break;
       case 'xls-file':
-        $(event.currentTarget).attr('href', 'data:application/vnd.ms-excel,' +
-          encodeURIComponent(this.spreadsheetML()));
+        if (this.dlAttrSupported) {
+          $(event.currentTarget).attr('href', 'data:application/vnd.ms-excel,' +
+            encodeURIComponent(this.spreadsheetML()));
+        } else {
+          $.fileDownload('/xls.php', {
+            httpMethod: 'POST',
+            data: {
+              html: encodeURIComponent(this.spreadsheetML())
+            }
+          });
+          return false;
+        }
         break;
     }
   },
@@ -59,6 +98,8 @@ module.exports = Marionette.ItemView.extend({
   initialize: function(options) {
     this.options = options;
     this.isSpecialTerm = options.semester === 3 || options.semester === 4;
+
+    this.dlAttrSupported = 'download' in document.createElement('a');
   },
 
   serializeData: function () {
@@ -84,7 +125,7 @@ module.exports = Marionette.ItemView.extend({
       '#times div{margin-right:-13px;text-align:right}' +
       '#exam-timetable > table{font-weight: bold;border:1px solid #555;}' +
       '#exam-timetable > table th{border:1px solid #555;background-color: #eee;}' +
-      '#exam-timetable > table td{border:1px solid #555;}' +
+      '#exam-timetable > table td{border:1px solid #555; padding: 5px;}' +
       '#exam-timetable > table td:first-child{text-align: right;}' +
       '#exam-timetable > table tr.clash{background-color: #eee; color:red !important}' +
       '.day{border-bottom:1px solid #ddd;border-top:1px solid #ddd}' +
@@ -278,7 +319,7 @@ module.exports = Marionette.ItemView.extend({
   spreadsheetML: function() {
     var xml =
         '<?xml version="1.0"?>' +
-        '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"' +
+        '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" ' +
         'xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">' +
         '<Styles>' +
         '<Style ss:ID="Default">' +
@@ -345,6 +386,7 @@ module.exports = Marionette.ItemView.extend({
 
     var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     var daysAbbrev = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    var newLine = window.navigator.platform.indexOf('Win') !== -1 ? '&#13;&#10;' : '&#13;';
 
     _.each(daysAbbrev, function(dayAbbrev, i) {
       var rows = $('#' + dayAbbrev + ' > tr');
@@ -369,11 +411,11 @@ module.exports = Marionette.ItemView.extend({
           if (lesson.get('duration') > 1) {
             xml += '" ss:MergeAcross="' + (lesson.get('duration') - 1);
           }
-          xml += '"><Data ss:Type="String">' + lesson.get('ModuleCode') + '&#13;' +
-              lesson.get('typeAbbrev') + ' ' + lesson.get('ClassNo') + '&#13;' +
+          xml += '"><Data ss:Type="String">' + lesson.get('ModuleCode') + newLine +
+              lesson.get('typeAbbrev') + ' ' + lesson.get('ClassNo') + newLine +
               lesson.get('Venue');
           if (lesson.get('WeekText') !== 'Every Week') {
-            xml += '&#13;' + lesson.get('weekStr');
+            xml += newLine + lesson.get('weekStr');
           }
           xml += '</Data></Cell>';
         });
